@@ -1,0 +1,185 @@
+{% extends 'Tutor/tutor_navbar.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Grade to Teach</h6>
+                    <!-- <a href="">Show All</a> -->
+                </div>
+                <form action="{% url 'tutor_addmore_grade' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="d-flex mb-2">
+                    <select class="form-select" id="gradeSelect" name="g">
+                        <option selected>Add More Grade</option>
+                        {% for g in grades %}
+                        <option value="{{g.grade}}">{{g.grade}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary ms-2" id="addButton">Add</button>
+                </div>
+            </form>
+
+                <span class="text-danger" id="errorspan" hidden>You Already Selected This Grade</span>
+                {% for tg in tu_grade reversed %}
+                <div class="d-flex align-items-center border-bottom py-2">
+
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>{{tg.grade}}</span>
+                            <a href="{% url 'delete_tutorgrade' tg.id %}">
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Subjects to Teach</h6>
+                    <!-- <a href="">Show All</a> -->
+                </div>
+                <form action="{% url 'tutor_addmore_sub' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="d-flex mb-2">
+                    <select class="form-select" id="subSelect" name="s">
+                        <option selected>Add More Subject</option>
+                        {% for s in sub %}
+                        <option value="{{s.subject}}">{{s.subject}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary ms-2" id="addButton2">Add</button>
+                </div>
+
+                </form>
+
+
+
+                <span class="text-danger" id="errorspan2" hidden>You Already Selected This Subject</span>
+                
+                {% for ts in tu_sub reversed %}
+                <div class="d-flex align-items-center border-bottom py-2">
+
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>{{ts.subject}}</span>
+                            <a href="{% url 'delete_tutorsub' ts.id %}">
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const gradeSelect = document.getElementById('gradeSelect');
+        const addButton = document.getElementById('addButton');
+        function toggleButtonVisibility() {
+            if (gradeSelect.value === 'Add More Grade') {
+                addButton.style.display = 'none';
+                $('#errorspan').attr('hidden','hidden')
+            } else {
+                addButton.style.display = 'inline-block';
+                $('#errorspan').attr('hidden','hidden')
+                GradeFinder();
+            }
+        }
+        toggleButtonVisibility();
+        gradeSelect.addEventListener('change', toggleButtonVisibility);
+    });
+    function GradeFinder() {
+        var grade = $('#gradeSelect').val();
+        const addButton = document.getElementById('addButton');
+        $.ajax({
+            url: "{% url 'tutor_Gradechecker' %}",
+            type: 'POST',
+            data: {
+                'value': grade,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                if ('1' in response) {
+                    $('#errorspan').removeAttr('hidden')
+                    addButton.style.display = 'none';
+                } else {
+                    console.log('Saved')
+                }
+            }
+        });
+    }
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const gradeSelect = document.getElementById('subSelect');
+        const addButton = document.getElementById('addButton2');
+        function toggleButtonVisibility1() {
+            if (gradeSelect.value === 'Add More Subject') {
+                addButton.style.display = 'none';
+                $('#errorspan2').attr('hidden','hidden')
+            } else {
+                addButton.style.display = 'inline-block';
+                $('#errorspan2').attr('hidden','hidden')
+                SubjectFinder();
+            }
+        }
+        toggleButtonVisibility1();
+        gradeSelect.addEventListener('change', toggleButtonVisibility1);
+    });
+    function SubjectFinder() {
+        var grade = $('#subSelect').val();
+        const addButton2 = document.getElementById('addButton2');
+        $.ajax({
+            url: "{% url 'tutor_Subchecker' %}",
+            type: 'POST',
+            data: {
+                'value': grade,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                if ('1' in response) {
+                    $('#errorspan2').removeAttr('hidden')
+                    addButton2.style.display = 'none';
+                } else {
+                    console.log('Saved')
+                }
+            }
+        });
+    }
+
+
+</script>
+
+
+
+<script>
+    var navLink = document.querySelector('.gs-nav');
+    navLink.classList.add('active');
+
+</script>
+
+
+{% endblock %}

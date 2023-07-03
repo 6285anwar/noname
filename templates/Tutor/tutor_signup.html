@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>TUTOR-MARKETPLACE</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+
+
+
+
+                            <div class="card mb-3" id="signupform">
+                                <div class="card-body">
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Sign Up</h5>
+                                    </div>
+                                    <form class="row g-3 needs-validation" validate id="signup-form" method="post"
+                                        autocomplete="off">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <label for="yourName" class="form-label">Name</label>
+                                            <input type="text" name="name" class="form-control" id="yourName" required
+                                                autocomplete="off">
+
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="yourEmail" class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" id="yourEmail"
+                                                required autocomplete="off">
+                                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="yourEmail" class="form-label">Phone</label>
+                                            <input type="text" name="phone" pattern="[7-9]{1}[0-9]{9}" id="yourPhone"
+                                                class="form-control" required autocomplete="off">
+                                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="yourPassword" class="form-label">Country / City</label>
+                                            <input type="text" name="city" class="form-control" id="yourCity" required
+                                                autocomplete="off">
+                                            <div class="invalid-feedback">Please enter your password!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="terms" type="checkbox" value=""
+                                                    id="acceptTerms" required>
+                                                <label class="form-check-label" for="acceptTerms">I agree and accept the
+                                                    <a href="#">terms and conditions</a></label>
+                                                <div class="invalid-feedback">You must agree before submitting.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">
+                                                <div id="word">
+                                                    Sign Up
+                                                </div>
+                                                <div class="spinner-border" style="width: 2rem; height: 2rem;"
+                                                    role="status" id="spin" hidden>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">Already have an account? <a
+                                                    href="{% url 'tutor_login' %}">Log in</a></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="card mb-3" id="otpform" hidden>
+                                <div class="card-body justify-content-center">
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">OTP</h5>
+                                    </div>
+
+
+                                    <div class="container height-100 d-flex justify-content-center align-items-center">
+                                        <div class="position-relative">
+                                            <div class="p-2 text-center">
+                                                <h6>Please enter the one time password <br> to verify your account</h6>
+                                                <div> <span>A code has been sent to</span> <small id="hiddenEmail">
+
+                                                    </small>
+                                                </div>
+                                                <div id="otp"
+                                                    class="inputs d-flex flex-row justify-content-center mt-2">
+                                                    <input class="m-2 text-center form-control rounded" type="text"
+                                                        id="first" maxlength="1" />
+                                                    <input class="m-2 text-center form-control rounded" type="text"
+                                                        id="second" maxlength="1" />
+                                                    <input class="m-2 text-center form-control rounded" type="text"
+                                                        id="third" maxlength="1" />
+                                                    <input class="m-2 text-center form-control rounded" type="text"
+                                                        id="fourth" maxlength="1" />
+                                                </div>
+                                                <div id="errormsg" hidden class="mt-2">
+                                                    <h6 class="text-danger">invalid OTP</h6>
+                                                </div>
+                                                <div class="mt-3">
+                                                    <button class="btn btn-primary px-4 validate"
+                                                        onclick="otpvalidation()">Validate</button>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="card-2">
+                                                <div class="content d-flex justify-content-center align-items-center">
+                                                    <span>Didn't get the code</span> <a href="#"
+                                                        class="text-decoration-none ms-3">Resend(1/3)</a>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+
+
+    <script>
+        function otpvalidation() {
+            var first = document.getElementById('first').value;
+            var second = document.getElementById('second').value;
+            var third = document.getElementById('third').value;
+            var fourth = document.getElementById('fourth').value;
+
+            var otp = first + second + third + fourth;
+            var savedOTP = sessionStorage.getItem("OTP");
+
+            if (otp === savedOTP) {
+                var name = sessionStorage.getItem("nameis");
+                var email = sessionStorage.getItem("emailis");
+                var phone = sessionStorage.getItem("phoneis");
+                var city = sessionStorage.getItem("cityis");
+
+                var data = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    city: city,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                };
+                $.ajax({
+                    url: '{% url "email_authentication" %}',
+                    method: 'POST',
+                    data: data,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", data.csrfmiddlewaretoken); 
+                    },
+                    success: function (response) {
+
+                        window.location.href = '/tutor_createprofile/'+response.id;
+                    },
+                    error: function (xhr, status, error) {
+                        $('#errormsg').removeAttr('hidden');
+                    }
+                });
+                $('#errormsg').hide;
+            } else {
+                $('#errormsg').removeAttr('hidden');
+                document.getElementById('first').value = "";
+                document.getElementById('second').value = "";
+                document.getElementById('third').value = "";
+                document.getElementById('fourth').value = "";
+            }
+
+        }
+
+    </script>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#signup-form').submit(function (event) {
+                event.preventDefault();
+
+                var namesis = $('#yourName').val();
+                var emailis = $('#yourEmail').val();
+                var phoneis = $('#yourPhone').val();
+                var cityis = $('#yourCity').val();
+
+                console.log($(this).serialize());
+                $('#spin').removeAttr('hidden').show();
+                $('#word').hide();
+
+                $.ajax({
+                    url: "{% url 'signup_ajax' %}",
+                    type: 'post',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        var save = response.otpnumber;
+                        console.log(save);
+
+                        sessionStorage.setItem("OTP", save);
+                        sessionStorage.setItem('nameis', namesis);
+                        sessionStorage.setItem('emailis', emailis);
+                        sessionStorage.setItem('phoneis', phoneis);
+                        sessionStorage.setItem('cityis', cityis);
+
+                        $('#signupform').hide();
+                        $('#otpform').removeAttr('hidden');
+
+                        $('#hiddenEmail').text(emailis.substr(0, 3) + "******" + emailis.substr(emailis.indexOf("@")));
+                    },
+                    complete: function () {
+                        $('#spin').hide();
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            function OTPInput() {
+                const inputs = document.querySelectorAll('#otp > *[id]');
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].addEventListener('keydown', function (event) {
+                        if (event.key === "Backspace") {
+                            inputs[i].value = '';
+                            if (i !== 0) inputs[i - 1].focus();
+                        } else { if (i === inputs.length - 1 && inputs[i].value !== '') { return true; } else if (event.keyCode > 47 && event.keyCode < 58) { inputs[i].value = event.key; if (i !== inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode > 64 && event.keyCode < 91) { inputs[i].value = String.fromCharCode(event.keyCode); if (i !== inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } }
+                    });
+                }
+            } OTPInput();
+
+
+        });
+    </script>
+
+    <script>
+        function onloaded() {
+            sessionStorage.removeItem("OTP");
+            sessionStorage.clear();
+        }
+        onloaded();
+    </script>
+
+    <!-- <script>
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+
+        function detectInspectMode() {
+            function handleInspectMode() {
+                // Perform actions when inspect mode is detected
+                // For example, redirect the user or display a warning message
+                alert('Inspect mode is active!');
+            }
+
+            // Check for inspect mode periodically
+            setInterval(function () {
+                if (window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) {
+                    handleInspectMode();
+                }
+            }, 1000);
+        }
+
+        detectInspectMode();
+    </script> -->
+
+    <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+    <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

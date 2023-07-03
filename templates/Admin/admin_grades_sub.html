@@ -1,0 +1,136 @@
+{% extends 'Admin/admin_navbar.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<section class="section">
+        <div class="row">
+                <div class="col-lg-6">
+
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">Grade Table</h5>
+
+                                        <!-- Default Table -->
+                                        <table class="table">
+                                                <thead>
+                                                        <tr>
+
+                                                                <th scope="col">Grades</th>
+                                                                <th scope="col" class="text-center">Tuors</th>
+                                                                <th scope="col" class="text-center">Students</th>
+
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                        <tr>
+                                                                <td>
+                                                                        <form action="{% url 'admin_Addgrade' %}"
+                                                                                method="post">
+                                                                                {% csrf_token %}
+                                                                                <input type="text"
+                                                                                        placeholder="add Grade"
+                                                                                        name="gr" required>
+                                                                                <button><i class="bi bi-plus"></i></button>
+                                                                        </form>
+                                                                </td>
+                                                                <td></td>
+                                                                <td></td>
+
+
+
+
+                                                        </tr>
+
+                                                        {% for g in grade reversed %}
+                                                        <tr>
+
+                                                                <td>{{g.grade}}</td>
+                                                                <td class="text-center">{{g.tutors_count}}</td>
+                                                                <td class="text-center">{{g.students_count}}</td>
+
+                                                        </tr>
+                                                        {% endfor %}
+
+                                                </tbody>
+                                        </table>
+                                        <!-- End Default Table Example -->
+                                </div>
+                        </div>
+                </div>
+
+
+                <div class="col-lg-6">
+
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">Subject Table</h5>
+
+                                        <!-- Default Table -->
+                                        <table class="table">
+                                                <thead>
+                                                        <tr>
+
+                                                                <th scope="col">Subjects</th>
+                                                                <!-- <th scope="col" class="text-center">Tuors</th>
+                                                                <th scope="col" class="text-center">Students</th> -->
+
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                        <tr>
+                                                                <td>
+                                                                        <form action="{% url 'admin_Addsubject' %}"
+                                                                                method="post">
+                                                                                {% csrf_token %}
+                                                                                <input type="text"
+                                                                                        placeholder="add Subject"
+                                                                                        name="sub" required>
+                                                                                <button><i class="bi bi-plus"></i></button>
+                                                                        </form>
+                                                                </td>
+                                                              
+                                                        </tr>
+
+                                                        {% for s in subs reversed %}
+                                                        <tr>
+
+                                                                <td>{{s.subject}}</td>
+                                                        </tr>
+                                                        {% endfor %}
+
+                                                </tbody>
+                                        </table>
+                                        <!-- End Default Table Example -->
+                                </div>
+                        </div>
+                </div>
+
+
+
+
+
+
+
+        </div>
+</section>
+
+
+
+
+
+
+<script>
+        // Get the nav-link element
+        var navLink = document.querySelector('.grade-nav');
+
+        // // Add the "collapsed" class
+        // navLink.classList.add('collapsed');
+
+        // Remove the "collapsed" class
+        navLink.classList.remove('collapsed');
+</script>
+{% endblock %}

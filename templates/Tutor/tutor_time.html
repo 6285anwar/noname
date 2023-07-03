@@ -1,0 +1,516 @@
+{% extends 'tutor/tutor_navbar.html' %}
+{% block content %}
+{% load static %}
+
+
+
+
+
+
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+
+
+
+        <div class="col-12 col-lg-12" id="tablecol">
+            <div class="bg-light rounded h-100 p-4">
+
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0">Day Time Table</h6>
+                    <button class="btn btn-outline-primary m-2" onclick="ToggleVisibility()">Add Time<i class="fa fa-plus ms-2"></i></button>
+                </div>
+                
+                
+
+
+                <div class="col-lg-12">
+                    <div class="bg-light rounded h-100 p-4">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Monday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Mon in timeslots_Mon %}
+                                        <tr>
+
+                                            <td>{{ timeslots_Mon.from_time |time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Mon.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Mon.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6 >Tuesday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Tue in timeslots_Tue %}
+                                        <tr>
+                                            <td>{{ timeslots_Tue.from_time|time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Tue.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Tue.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger "><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6 >Wednesday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Wed in timeslots_Wed %}
+                                        <tr>
+                                            <td>{{ timeslots_Wed.from_time|time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Wed.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Wed.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6 >Thursday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Thu in timeslots_Thu %}
+                                        <tr>
+                                            <td>{{ timeslots_Thu.from_time|time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Thu.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Thu.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h6 >Friday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Fri in timeslots_Fri %}
+                                        <tr>
+                                            <td>{{ timeslots_Fri.from_time|time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Fri.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Fri.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h6 >Saturday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Sat in timeslots_Sat %}
+                                        <tr>
+                                            <td>{{ timeslots_Sat.from_time|time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Sat.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Sat.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="col-md-12">
+                                <h6 >Sunday</h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for timeslots_Sun in timeslots_Sun %}
+                                        <tr>
+                                            <td>{{ timeslots_Sun.from_time|time:"H:i:s" }}</td>
+                                            <td>{{ timeslots_Sun.to_time|time:"H:i:s" }}</td>
+                                            <td><a href="{% url 'delete_save_time' timeslots_Sun.id %}">
+                                                <button type="button" class="btn btn-sm btn-sm-square btn-square btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-12 col-lg-12 mb-5" id="addcol" hidden>
+            <div class="bg-light rounded h-100 p-4">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0">Add Day Time</h6>
+                    <button class="btn btn-outline-primary m-2" onclick="ToggleVisibilityOff()">Close<i class="fa fa-times ms-2"></i></button>
+                </div>
+
+                <form action="{% url 'save_times' t.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row d-flex Monday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="mondayCheckbox" id="mondayCheckbox"
+                                    onclick="checkboxClicked(this, 'Monday')">
+                                Monday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row " id="Monday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Monday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Monday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Monday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Monday-rows"></div>
+
+                    <!-- <div class="block mt-5 mb-5"></div> -->
+
+
+
+
+                    <div class="row d-flex Tuesday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="tuesdayCheckbox" id="tuesdayCheckbox"
+                                    onclick="checkboxClicked(this, 'Tuesday')">
+                                Tuesday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" id="Tuesday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Tuesday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Tuesday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Tuesday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Tuesday-rows"></div>
+
+
+                    <!-- <div class="block mt-5 mb-5"></div> -->
+
+                    <div class="row d-flex Wednesday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="wednesdayCheckbox" id="wednesdayCheckbox"
+                                    onclick="checkboxClicked(this, 'Wednesday')">
+                                Wednesday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" id="Wednesday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Wednesday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Wednesday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Wednesday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Wednesday-rows"></div>
+
+
+
+                    <!-- <div class="block mt-5 mb-5"></div> -->
+
+                    <div class="row d-flex Thursday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="ThursdayCheckbox" id="ThursdayCheckbox"
+                                    onclick="checkboxClicked(this, 'Thursday')">
+                                Thursday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" id="Thursday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Thursday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Thursday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Thursday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Thursday-rows"></div>
+
+
+                    <!-- <div class="block mt-5 mb-5"></div> -->
+
+                    <div class="row d-flex Friday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="FridayCheckbox" id="FridayCheckbox"
+                                    onclick="checkboxClicked(this, 'Friday')">
+                                Friday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" id="Friday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Friday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Friday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Friday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Friday-rows"></div>
+
+
+                    <!-- <div class="block mt-5 mb-5"></div> -->
+
+                    <div class="row d-flex Saturday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="SaturdayCheckbox" id="SaturdayCheckbox"
+                                    onclick="checkboxClicked(this, 'Saturday')">
+                                Saturday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" id="Saturday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Saturday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Saturday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Saturday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Saturday-rows"></div>
+
+
+                    <!-- <div class="block mt-5 mb-5"></div> -->
+
+                    <div class="row d-flex Sunday-time-row">
+                        <div class="col-3">
+                            <label class="col-form-label mt-4 text-dark">
+                                <input type="checkbox" name="SundayCheckbox" id="SundayCheckbox"
+                                    onclick="checkboxClicked(this, 'Sunday')">
+                                Sunday
+                            </label>
+                        </div>
+                        <div class="col-9">
+                            <div class="row" id="Sunday-row" hidden>
+                                <div class="col-5">
+                                    <div class="form-text">From</div>
+                                    <input type="time" class="form-control" name="Sunday_from[]">
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-text">To</div>
+                                    <input type="time" class="form-control" name="Sunday_to[]">
+                                </div>
+                                <div class="col-2 mt-4">
+                                    <button type="button" class="btn btn-square btn-outline-dark rowbtn"
+                                        data-day="Sunday"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Sunday-rows"></div>
+                    <button type="submit" class="btn btn-primary mt-4" id="Save">Save</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.rowbtn').click(function () {
+            var day = $(this).data('day');
+            var newRow = $('.' + day + '-time-row').first().clone();
+            newRow.find('.col-form-label').remove();
+            newRow.find('.rowbtn').remove();
+            newRow.find('input').val('');
+            newRow.appendTo('#' + day + '-rows');
+
+            var deleteButton = $('<button type="button" class="btn btn-square btn-outline-dark deletebtn"><i class="fa fa-trash"></i></button>');
+            newRow.find('.col-2').append(deleteButton);
+        });
+    });
+
+    $(document).on('click', '.deletebtn', function () {
+        $(this).closest('.row').remove();
+    });
+
+    function checkboxClicked(checkbox, day) {
+        var fromInput = $('input[name="' + day + '_from[]"]');
+        var toInput = $('input[name="' + day + '_to[]"]');
+        if (checkbox.checked) {
+            $('#' + day + '-row').removeAttr('hidden');
+            fromInput.prop('required', true);
+            toInput.prop('required', true);
+        } else {
+            $('#' + day + '-row').attr('hidden', true);
+            fromInput.prop('required', false);
+            toInput.prop('required', false);
+        }
+    }
+
+</script>
+
+<script>
+    function ToggleVisibility() {
+        $('#addcol').removeAttr('hidden');
+        $('#tablecol').attr('hidden', true);
+    }
+</script>
+<script>
+    function ToggleVisibilityOff() {
+        $('#tablecol').removeAttr('hidden','hidden');
+        $('#addcol').attr('hidden', true);
+    }
+</script>
+
+
+<script>
+    var navLink = document.querySelector('.time-nav');
+    navLink.classList.add('active');
+
+</script>
+
+
+{% endblock %}

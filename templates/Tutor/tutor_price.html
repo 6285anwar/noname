@@ -1,0 +1,196 @@
+{% extends 'tutor/tutor_navbar.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .price-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .price-card h2 {
+        color: #333;
+        font-size: 24px;
+    }
+
+    .price-card .price {
+        color: #000;
+        font-size: 30px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .price-card .btn {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        font-size: 16px;
+    }
+
+    .price-card .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12 col-lg-12" id="tablecol">
+            <div class="bg-light rounded h-100 p-4">
+                
+                <a href="#" class="mb-2 btn btn-outline-primary" onclick="EditPrice()" id="editbtn"><i class="fa fa-pen">Edit</i></a>
+
+                <a href="#" class="mb-2 btn btn-outline-primary" onclick="ClosePriceForm()" id="closebtn" hidden><i class="fa fa-times">Close</i></a>
+
+
+                <form action="{% url 'save_price' t.id %}" class="form-control" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="row mt-3">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+
+
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4>One on One</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="price-card">
+                                            <h2>Per Hour</h2>
+                                            <hr>
+                                            <div class="price text-success" id="p1">₹{{t.price_oneonone_hr}}</div>
+
+
+                                            <div id="i1" hidden>
+                                                <input type="text" class="form-control" value="{{t.price_oneonone_hr}}" name="poh">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="price-card">
+                                            <h2>Per Session</h2>
+                                            <hr>
+                                            <div class="price text-success" id="p2">₹{{t.price_oneonone_session}}</div>
+
+                                            <div id="i2" hidden>
+                                                <input type="text" class="form-control" value="{{t.price_oneonone_session}}" name="pos">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4>Group</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="price-card">
+                                            <h2>Per Hour</h2>
+                                            <hr>
+                                            <div class="price text-success" id="p3">₹{{t.price_group_hr}}</div>
+
+                                            <div id="i3" hidden>
+                                                <input type="text" class="form-control" value="{{t.price_group_hr}}" name="pgh">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-2">
+                                        <div class="price-card">
+                                            <h2>Per Session</h2>
+                                            <hr>
+                                            <div class="price text-success" id="p4">₹{{t.price_group_session}}</div>
+
+                                            <div id="i4" hidden>
+                                                <input type="text" class="form-control" value="{{t.price_group_session}}" name="pgs">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+                <button type="submit" id="Savebtn" class="btn btn-primary" hidden>save</button>
+
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function EditPrice(){
+        $('#p1').hide();
+        $('#p2').hide();
+        $('#p3').hide();
+        $('#p4').hide();
+        $('#editbtn').hide();
+
+        $('#i1').removeAttr('hidden')
+        $('#i2').removeAttr('hidden')
+        $('#i3').removeAttr('hidden')
+        $('#i4').removeAttr('hidden')
+        $('#closebtn').removeAttr('hidden')
+        $('#Savebtn').removeAttr('hidden')
+    }
+
+    function ClosePriceForm(){
+        location.reload();
+    }
+</script>
+
+
+<script>
+    var navLink = document.querySelector('.price-nav');
+    navLink.classList.add('active');
+
+</script>
+{% endblock %}
